@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'attendance_tracking.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd10vul8fdg5pv6',
+        'USER': 'mrjwovntrjrxby',
+        'PASSWORD': 'cf7d41490ea45aaa971e8357642ca7946b9ca785f1b1edf928530e8c402b9f19',
+        'HOST': 'ec2-46-137-188-105.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
