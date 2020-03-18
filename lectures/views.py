@@ -30,11 +30,24 @@ def lecture_list(request):
 @login_required(login_url="/login/")
 def lecture_details(request, id):
     lecture = models.Lecture.objects.get(id=id)
-    qr_code_str = hash(hash(lecture.secret) + hash(datetime.datetime.now().timestamp() // 3))
+    qr_code_str = get_qr_code(lecture.secret)
     return render(request, 'lectures/lecture_details.html', {'lecture': lecture, 'qr_code_str':qr_code_str})
 
 def lecture_qr_code(request, id):
     lecture = models.Lecture.objects.get(id=id)
-    qr_code_str = hash(hash(lecture.secret) + hash(datetime.datetime.now().timestamp() // 3))
-    print(qr_code_str)
+    qr_code_str = get_qr_code(lecture.secret)
     return render(request, 'lectures/lecture_qr_code.html', {'qr_code_str':qr_code_str})
+
+def get_qr_code(secret):
+    hasher = hashlib.sha256()
+    hasher.update(secret.encode("UTF-8"))
+
+    secret_hashed = hasher.hexdigest()
+
+    hasher.update(str(datetime.datetime.now().timestamp()//3).encode("UTF-8"))
+
+    time_hashed = hasher.hexdigest()
+    
+    hasher.update((str(secret_hashed) + "-" + str(time_hashed)).encode("UTF-8"))
+
+    return hasher.hexdigest()

@@ -1,7 +1,10 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<button action=""></button>
+<form class="back-button" action="{% url 'lectures:list' %}", method="POST">
+    {% csrf_token %}
+    <button type="submit">back</button>
+</form>
 
 <div class="create-lecture">
     <h1>Create a new lecture</h1>
