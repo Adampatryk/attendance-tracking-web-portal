@@ -1,0 +1,16 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<button action=""></button>
+
+<div class="create-lecture">
+    <h1>Create a new lecture</h1>
+</div>
+
+<form class="create-lecture-form" action="{% url 'lectures:create' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Create">
+</form>
+
+{% endblock %}

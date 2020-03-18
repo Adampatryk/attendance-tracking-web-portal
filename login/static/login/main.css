@@ -1,0 +1,52 @@
+@import url(//db.onlinewebfonts.com/c/5d22bd0816f911a4c90e5d8661157ef9?family=Microsoft+Yi+Baiti);
+
+@font-face {font-family: "Microsoft Yi Baiti"; 
+    src: url("//db.onlinewebfonts.com/t/5d22bd0816f911a4c90e5d8661157ef9.eot"); 
+    src: url("//db.onlinewebfonts.com/t/5d22bd0816f911a4c90e5d8661157ef9.eot?#iefix") 
+    format("embedded-opentype"), url("//db.onlinewebfonts.com/t/5d22bd0816f911a4c90e5d8661157ef9.woff2") 
+    format("woff2"), url("//db.onlinewebfonts.com/t/5d22bd0816f911a4c90e5d8661157ef9.woff") 
+    format("woff"), url("//db.onlinewebfonts.com/t/5d22bd0816f911a4c90e5d8661157ef9.ttf") 
+    format("truetype"), url("//db.onlinewebfonts.com/t/5d22bd0816f911a4c90e5d8661157ef9.svg#Microsoft Yi Baiti") 
+    format("svg"); }
+
+body {
+    background-color: rgba(54, 134, 255, 0.705);
+    color: white;
+    font-family: "Microsoft Yi Baiti";
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 5px;  
+}
+
+label {
+    color: gray;
+}
+
+input[type="submit"]{
+    background-color: #3686FF;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+    font-size: xx-large;
+}
+
+input {
+    width: 100%;
+    font-size: larger;
+}
+
+.v-center {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.container {
+    margin: auto;
+}

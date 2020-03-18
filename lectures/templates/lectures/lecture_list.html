@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<h1>this is the list of lectures</h1>
+
+<div class="lecture-list">
+    {% for lecture in lectures %}
+        <div class="lecture">
+            <h2><a href="{% url 'lectures:details' id=lecture.id %}">{{lecture.title}}</a></h2>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

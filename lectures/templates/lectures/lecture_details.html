@@ -1,0 +1,26 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<h1>lecture details</h1>
+
+<p>{{lecture.id}}</p>
+<p>{{lecture.title}}</p>
+<p>{{lecture.datetime}}</p>
+
+<div id="qr-code">
+    {% include 'lectures/lecture_qr_code.html' %}
+</div>
+
+<script>
+    setInterval(function(){
+        $.ajax({
+            url: "{% url 'lectures:qr-code' id=lecture.id %}",
+            success: function(data) {
+                $("#qr-code").html(data);
+            }
+        });
+    }, 500);
+</script>
+
+{% endblock %}

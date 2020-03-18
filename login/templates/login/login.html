@@ -1,14 +1,23 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
+<div class="row centered-form center-block">
+    <div class="container col-md-3 col-md-offset-1">
+    
+        <h1>attendance portal login</h1>
+        <form class="site-form" action="{% url 'login:login' %}" method="POST">
+            {% csrf_token%}
+            {{form}}
 
-<h1>Log In</h1>
-<form class="site-form" action="{% url 'login:login' %}" method="POST">
-    {% csrf_token%}
-    {{form}}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+            {% endif %}
+            
+            <input type="submit" value="login">
+        </form>
 
-    <input type="submit" value="Sign In">
-</form>
+    </div>
+</div>
 
 
 {% endblock %}
