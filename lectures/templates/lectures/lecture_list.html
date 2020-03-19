@@ -2,15 +2,21 @@
 
 {% block content %}
 
-<form class="create-lecture-button" action="{% url 'lectures:create' %}", method="GET">
+<form class="create-lecture-button" action="{% url 'lectures:create' %}" method="POST">
+    {% csrf_token %}
     <button type="submit">create</button>
+</form>
+
+<form class="show-modules-button" action="{% url 'lectures:list_modules' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">show modules</button>
 </form>
 
 <h1>this is the list of lectures</h1>
 
-<div class="lecture-list">
+<div class="list">
     {% for lecture in lectures %}
-        <div class="lecture">
+        <div class="item">
             <h2><a href="{% url 'lectures:details' id=lecture.id %}">{{lecture.title}}</a></h2>
         </div>
     {% endfor %}

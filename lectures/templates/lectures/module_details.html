@@ -1,0 +1,14 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<form class="nav-button" action="{% url 'lectures:list' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">back</button>
+</form>
+<h1>module details</h1>
+
+<p>{{module.id}}</p>
+<p>{{module.title}}</p>
+
+{% endblock %}

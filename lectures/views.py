@@ -51,10 +51,21 @@ def lecture_details(request, id):
     qr_code_str = get_qr_code(lecture.secret)
     return render(request, 'lectures/lecture_details.html', {'lecture': lecture, 'qr_code_str':qr_code_str})
 
+@login_required(login_url="/login/")
 def lecture_qr_code(request, id):
     lecture = models.Lecture.objects.get(id=id)
     qr_code_str = get_qr_code(lecture.secret)
     return render(request, 'lectures/lecture_qr_code.html', {'qr_code_str':qr_code_str})
+
+@login_required(login_url="/login/")
+def modules_list(request):
+    modules = models.Module.objects.all().filter(professorId = request.user.id)
+    return render(request, 'lectures/modules_list.html', {'modules': modules})
+
+@login_required(login_url="/login/")
+def module_details(request, id):
+    module = models.Module.objects.get(id=id)
+    return render(request, 'lectures/module_details.html', {'module': module})
 
 def get_qr_code(secret):
     hasher = hashlib.sha256()
