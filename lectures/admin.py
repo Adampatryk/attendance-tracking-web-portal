@@ -10,6 +10,18 @@ class LectureAdmin(admin.ModelAdmin):
 
 @admin.register(Module)
 class ModuleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'professorId', 'moduleCode', 'academicYearStart', 'active')
-    list_filter = ('title', 'professorId', 'moduleCode', 'academicYearStart', 'active')
+    list_display = ('title', 'professor', 'moduleCode', 'academicYearStart', 'active')
+    list_filter = ('title', 'professor', 'moduleCode', 'academicYearStart', 'active')
     ordering = ['academicYearStart']
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('firstName', 'lastName', 'studentId')
+    list_filter = ('firstName', 'lastName', 'studentId')
+    ordering = ['firstName']
+
+@admin.register(Allocation)
+class AllocationAdmin(admin.ModelAdmin):
+    list_display = ('student', 'module')
+    list_filter = ('student', 'module')
+    ordering = ['module']

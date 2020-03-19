@@ -11,4 +11,12 @@
 <p>{{module.id}}</p>
 <p>{{module.title}}</p>
 
+<div class="list">
+    {% for student in students %}
+        <div class="item">
+            <h2><a href="{% url 'lectures:student_details' student_id=student.id %}">{{student.firstName}} {{student.lastName}}</a></h2>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

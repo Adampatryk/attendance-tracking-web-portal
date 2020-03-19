@@ -6,7 +6,7 @@
     {% csrf_token %}
     <button type="submit">back</button>
 </form>
-<form class="nav-button" action="{% url 'lectures:delete' id=lecture.id %}" method="POST">
+<form class="nav-button" action="{% url 'lectures:delete' lecture_id=lecture.id %}" method="POST">
     {% csrf_token %}
     <button type="submit">delete</button>
 </form>
@@ -24,7 +24,7 @@
 <script>
     setInterval(function(){
         $.ajax({
-            url: "{% url 'lectures:qr-code' id=lecture.id %}",
+            url: "{% url 'lectures:qr-code' lecture_id=lecture.id %}",
             success: function(data) {
                 $("#qr-code").html(data);
             }

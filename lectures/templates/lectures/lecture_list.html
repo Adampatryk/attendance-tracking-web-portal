@@ -7,9 +7,14 @@
     <button type="submit">create</button>
 </form>
 
-<form class="show-modules-button" action="{% url 'lectures:list_modules' %}" method="POST">
+<form class="list-modules-button" action="{% url 'lectures:modules_list' %}" method="POST">
     {% csrf_token %}
     <button type="submit">show modules</button>
+</form>
+
+<form class="list-students-button" action="{% url 'lectures:students_list' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">show students</button>
 </form>
 
 <h1>this is the list of lectures</h1>
@@ -17,7 +22,7 @@
 <div class="list">
     {% for lecture in lectures %}
         <div class="item">
-            <h2><a href="{% url 'lectures:details' id=lecture.id %}">{{lecture.title}}</a></h2>
+            <h2><a href="{% url 'lectures:details' lecture_id=lecture.id %}">{{lecture.title}}</a></h2>
         </div>
     {% endfor %}
 </div>

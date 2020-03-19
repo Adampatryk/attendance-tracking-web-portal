@@ -1,0 +1,24 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<form class="nav-button" action="{% url 'lectures:modules_list' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">back</button>
+</form>
+<h1>student details</h1>
+
+<p>{{student.id}}</p>
+<p>{{student.firstName}}</p>
+<p>{{student.lastName}}</p>
+<p>{{student.studentId}}</p>
+
+<h2>I have this student for:</h2>
+
+{% for module in modules %}
+    <div class="item">
+        <h2><a href="{% url 'lectures:module_details' module_id=module.id %}">{{module.title}}</a></h2>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -7,12 +7,12 @@
     <button type="submit">back</button>
 </form>
 
-<h1>this is the list of modules</h1>
+<h1>this is the list of students</h1>
 
 <div class="list">
-    {% for module in modules %}
+    {% for student in students %}
         <div class="item">
-            <h2><a href="{% url 'lectures:module_details' module_id=module.id %}">{{module.title}}</a></h2>
+            <h2><a href="{% url 'lectures:student_details' student_id=student.id %}">{{student.firstName}} {{student.lastName}} </a></h2>
         </div>
     {% endfor %}
 </div>
