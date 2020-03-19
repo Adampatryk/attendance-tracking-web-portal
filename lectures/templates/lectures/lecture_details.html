@@ -2,9 +2,13 @@
 
 {% block content %}
 
-<form class="back-button" action="{% url 'lectures:list' %}", method="POST">
+<form class="nav-button" action="{% url 'lectures:list' %}" method="POST">
     {% csrf_token %}
     <button type="submit">back</button>
+</form>
+<form class="nav-button" action="{% url 'lectures:delete' id=lecture.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">delete</button>
 </form>
 
 <h1>lecture details</h1>

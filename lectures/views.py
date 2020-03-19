@@ -6,7 +6,12 @@ from . import models
 import datetime
 import hashlib
 
-# Create your views here.
+@login_required(login_url="/login/")
+def lecture_delete(request, id):
+    lecture = models.Lecture.objects.get(id=id)
+    lecture.delete()
+    return redirect('lectures:list')
+
 @login_required(login_url="/login/")
 def lecture_create(request):
     if request.method == "POST":
