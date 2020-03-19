@@ -8,4 +8,4 @@ class CreateLecture(forms.ModelForm):
     datetime = forms.DateTimeField(widget=DateTimeInput)
     class Meta:
         model = models.Lecture
-        fields = ['classId', 'title', 'datetime']
+        fields = ['module', 'title', 'datetime']

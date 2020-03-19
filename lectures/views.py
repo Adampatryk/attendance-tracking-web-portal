@@ -23,14 +23,27 @@ def lecture_create(request):
             return redirect('lectures:list')
     else:
         form = forms.CreateLecture()
+        form.fields['module'].queryset = models.Module.objects.filter(professorId=request.user.id)
         return render(request, 'lectures/lecture_create.html', {'form':form})
     
 
 @login_required(login_url="/login/")
 def lecture_list(request):
+    #Get all lectures
     lectures = models.Lecture.objects.all().order_by('datetime')
 
-    return render(request, 'lectures/lecture_list.html', {'lectures': lectures})
+    #Get all modules this user has access to
+    modules = models.Module.objects.all().filter(professorId=request.user.id)
+    moduleIds = [module.id for module in modules]
+
+    #User's lectures
+    usersLectures = []
+
+    for lecture in lectures:
+        if (lecture.module.id in moduleIds):
+            usersLectures.append(lecture)
+
+    return render(request, 'lectures/lecture_list.html', {'lectures': usersLectures})
 
 @login_required(login_url="/login/")
 def lecture_details(request, id):
