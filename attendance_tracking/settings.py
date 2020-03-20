@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'qr_code',
     'lectures.apps.LecturesConfig',
     'login.apps.LoginConfig',
