@@ -58,7 +58,7 @@ def lecture_qr_code(request, lecture_id):
     return render(request, 'lectures/lecture_qr_code.html', {'qr_code_str':qr_code_str})
 
 @login_required(login_url="/login/")
-def modules_list(request):
+def module_list(request):
     modules = models.Module.objects.all().filter(professor = request.user.id)
     return render(request, 'lectures/modules_list.html', {'modules': modules})
 
@@ -70,7 +70,7 @@ def module_details(request, module_id):
     return render(request, 'lectures/module_details.html', {'module': module, 'students':students})
 
 @login_required(login_url="/login/")
-def students_list(request):
+def student_list(request):
     #Get all allocations for the above modules
     allocations = models.Allocation.objects.all().filter(module__professor=request.user.id)
 
