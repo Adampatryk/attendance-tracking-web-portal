@@ -2,20 +2,11 @@
 
 {% block content %}
 
-<form class="create-lecture-button" action="{% url 'lectures:create' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">create</button>
-</form>
-
-<form class="list-modules-button" action="{% url 'lectures:modules_list' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">show modules</button>
-</form>
-
-<form class="list-students-button" action="{% url 'lectures:students_list' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">show students</button>
-</form>
+<ul>
+    <li class="nav-button"><a href="{% url 'lectures:create' %}">Create Lecture</a></li>
+    <li class="nav-button"><a href="{% url 'lectures:modules_list' %}">Show Modules</a></li>
+    <li class="nav-button"><a href="{% url 'lectures:students_list' %}">Show Students</a></li>
+</ul>
 
 <h1>this is the list of lectures</h1>
 

@@ -25,16 +25,28 @@ SECRET_KEY = '1$5teyaga$42ibjq^nbfd8l5%ghu*x%0)5n6f9r^e339w-j9f7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["2b1e898a.ngrok.io", "localhost"]
-
+ALLOWED_HOSTS = ["0c3e4140.ngrok.io", "localhost"]
 
 # Application definition
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
 INSTALLED_APPS = [
-    'rest_framework',
+    #My Apps
     'qr_code',
     'lectures.apps.LecturesConfig',
     'login.apps.LoginConfig',
+
+    #Django Apps
+    'rest_framework',
+    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

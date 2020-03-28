@@ -23,4 +23,5 @@ urlpatterns = [
 
     #REST URLs
     path('api/lectures/', include('lectures.api.urls')),
+    path('api/api_login', include('login.api.urls')),
 ]

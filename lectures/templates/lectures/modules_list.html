@@ -2,10 +2,9 @@
 
 {% block content %}
 
-<form class="back-button" action="{% url 'lectures:list' %}", method="POST">
-    {% csrf_token %}
-    <button type="submit">back</button>
-</form>
+<ul>
+    <li class="nav-button"><a href="{% url 'lectures:list' %}">Back</a></li>
+</ul>
 
 <h1>this is the list of modules</h1>
 

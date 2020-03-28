@@ -2,10 +2,9 @@
 
 {% block content %}
 
-<form class="nav-button" action="{% url 'lectures:modules_list' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">back</button>
-</form>
+<ul>
+    <li class="nav-button"><a href="{% url 'modules:list' %}">Back</a></li>
+</ul>
 <h1>student details</h1>
 
 <p>{{student.id}}</p>
