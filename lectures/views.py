@@ -122,6 +122,9 @@ def student_details(request, student_id):
     except models.Student.DoesNotExist:
         return HttpResponseNotFound()
 
-    modules = get_modules_for_student(student)
+    student_modules = get_modules_for_student(student)
+    user_modules = get_modules_for_user(request.user)
+
+    modules = student_modules.intersection(user_modules)
 
     return render(request, 'lectures/student_details.html', {'student': student, 'modules':modules})

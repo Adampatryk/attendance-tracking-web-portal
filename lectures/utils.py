@@ -60,16 +60,11 @@ def get_lectures_for_user(user):
     #Get all lectures
     lectures = Lecture.objects.all().order_by('datetime')
 
-    #Get all modules this user has access to
-    teachingAllocation = Teaching.objects.all().filter(professor=user)
-    moduleIds = [module.id for module in teachingAllocation]
+    modules = get_modules_for_user(user)
+    moduleIds = [module.id for module in modules]
 
     #User's lectures
-    users_lectures = []
-
-    for lecture in lectures:
-        if (lecture.module.id in moduleIds):
-            users_lectures.append(lecture)
+    users_lectures = Lecture.objects.all().filter(module__id__in = moduleIds)
 
     return users_lectures
 
