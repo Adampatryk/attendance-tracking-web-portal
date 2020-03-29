@@ -14,18 +14,6 @@
         <title>Attendance System</title>
     </head>
     <body>
-        <header>
-            <nav>
-                <ul>
-                    <li>
-                        <form class="logout-link" action="{% url 'login:logout' %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit">logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-        </header>
         
         {% block content %} {% endblock content %}
         

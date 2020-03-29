@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<ul>
+<ul class="nav">
     <li class="nav-button"><a href="{% url 'lectures:list' %}">Back</a></li>
 </ul>
 
-<form class="nav-button" action="{% url 'lectures:delete' lecture_id=lecture.id %}" method="POST">
+<form action="{% url 'lectures:delete' lecture_id=lecture.id %}" method="POST">
     {% csrf_token %}
     <button type="submit">delete</button>
 </form>

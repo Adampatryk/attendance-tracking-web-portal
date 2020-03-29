@@ -2,8 +2,13 @@
 
 {% block content %}
 
-<ul>
-    <li class="nav-button"><a href="{% url 'lectures:create' %}">Create Lecture</a></li>
+<form id="signout-form" action="{% url 'login:logout' %}" method="POST">
+    {% csrf_token %}
+    <button id="signout-button" type="submit"> < sign out</button>
+</form>
+
+<ul class="nav">
+    <li class="nav-button"><a href="{% url 'lectures:create' %}">+ Create Lecture</a></li>
     <li class="nav-button"><a href="{% url 'lectures:modules_list' %}">Show Modules</a></li>
     <li class="nav-button"><a href="{% url 'lectures:students_list' %}">Show Students</a></li>
 </ul>
