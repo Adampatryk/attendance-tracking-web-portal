@@ -47,8 +47,10 @@ def api_module_details(request, module_id):
         #Get the module with id=module_id
         module = Module.objects.get(id=module_id)
         
-        #If the user is not the professor for this module, forbid access
-        if (module.professor != request.user):
+        #Get all modules
+        modules_for_user = get_modules_for_user(request.user)
+        #If the user does not teach this module, restrict access
+        if (module not in modules_for_user):
             return Response(status.HTTP_403_FORBIDDEN)
 
     except Module.DoesNotExist:

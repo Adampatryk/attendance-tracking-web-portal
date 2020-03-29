@@ -20,14 +20,24 @@ class StudentSerializer(serializers.ModelSerializer):
 class ModuleDetailSerializer(serializers.ModelSerializer):
 
     students = serializers.SerializerMethodField('get_students_for_module')
+    professors = serializers.SerializerMethodField('get_professors_for_module')
 
     class Meta:
         model = Module
-        fields = ['id', 'title', 'moduleCode', 'academicYearStart', 'active', 'students']
+        fields = ['id', 'title', 'moduleCode', 'academicYearStart', 'active', 'students', 'professors']
 
     def get_students_for_module(self, module):
         students = get_students_for_module(module)
         return StudentSerializer(students, many=True).data
+    
+    def get_professors_for_module(self, module):
+        professors = get_professors_for_module(module)
+        return UserSerializer(professors, many=True).data
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'date_joined']
 
 class StudentDetailSerializer(serializers.ModelSerializer):
     modules = serializers.SerializerMethodField('get_modules_for_student')

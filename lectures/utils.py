@@ -21,6 +21,16 @@ def get_students_for_module(module):
 
     return students
 
+def get_professors_for_module(module):
+    
+    #Get allocations for all the modules this user teaches
+    teachingAllocations = Teaching.objects.all().filter(module=module)
+    
+    #Get all the professors
+    professors = [allocation.professor for allocation in teachingAllocations]
+
+    return professors
+
 def get_students_for_user(user):
     #Get allocations for all the modules this user teaches
     teachingAllocations = Teaching.objects.all().filter(professor=user)
