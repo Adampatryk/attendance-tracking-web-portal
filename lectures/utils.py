@@ -3,6 +3,11 @@ from .models import *
 import hashlib
 import datetime
 
+
+def get_lectures_for_student(student):
+    #TODO implement getting lectures for student
+    None
+
 def get_modules_for_student(student):
     #Get all allocations for this student
     enrolledStudents = Enrollment.objects.all().filter(student=student)
@@ -48,11 +53,15 @@ def get_students_for_user(user):
     return set(students_for_user)
 
 def get_modules_for_user(user):
-    #Get all allocated modules
-    teachingAllocations = Teaching.objects.all().filter(professor=user)
 
+    #Get all allocated modules
+    if (user.usertypewrapper.is_lecturer == True):
+        allocations = Teaching.objects.all().filter(professor=user)
+    else:
+        allocations = Enrollment.objects.all().filter(student=user)
+    
     #Retrieve modules
-    modules = [allocation.module for allocation in teachingAllocations]
+    modules = [allocation.module for allocation in allocations]
 
     return modules
 
@@ -69,15 +78,20 @@ def get_lectures_for_user(user):
     return users_lectures
 
 def get_qr_code(secret):
-    hasher = hashlib.sha256()
-    hasher.update(secret.encode("UTF-8"))
+    #Get all the hashers
+    secretHasher = hashlib.sha256()
+    timeHasher = hashlib.sha256()
+    combinedHashed = hashlib.sha256()
 
-    secret_hashed = hasher.hexdigest()
+    #Hash the secret
+    secretHasher.update(secret.encode("UTF-8"))
+    secret_hashed = secretHasher.hexdigest()
 
-    hasher.update(str(datetime.datetime.now().timestamp()//3).encode("UTF-8"))
-
-    time_hashed = hasher.hexdigest()
+    #Hash the timestamp
+    timestamp = str(int(datetime.datetime.now().timestamp()//3))
+    timeHasher.update(timestamp.encode("UTF-8"))
+    time_hashed = timeHasher.hexdigest()
     
-    hasher.update((str(secret_hashed) + "-" + str(time_hashed)).encode("UTF-8"))
-
-    return hasher.hexdigest()
+    #Hash the combination
+    combinedHashed.update((secret_hashed + "-" + time_hashed).encode("UTF-8"))
+    return combinedHashed.hexdigest()

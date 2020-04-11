@@ -7,15 +7,20 @@ class LectureSerializer(serializers.ModelSerializer):
         model = Lecture
         fields = ['id', 'module', 'title', 'datetime', 'secret']
 
+class LectureDenormalizedSerializer(serializers.ModelSerializer):
+    module = serializers.SerializerMethodField('get_module_detail')
+    class Meta:
+        model = Lecture
+        fields = ['id', 'module', 'title', 'datetime', 'secret']
+
+    def get_module_detail(self, lecture):
+        return ModuleDetailSerializer(lecture.module).data
+
+
 class ModuleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Module
         fields = ['id', 'title', 'moduleCode', 'academicYearStart', 'active']
-
-class StudentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Student
-        fields = ['id', 'firstName', 'lastName', 'studentId']
 
 class ModuleDetailSerializer(serializers.ModelSerializer):
 
@@ -28,24 +33,18 @@ class ModuleDetailSerializer(serializers.ModelSerializer):
 
     def get_students_for_module(self, module):
         students = get_students_for_module(module)
-        return StudentSerializer(students, many=True).data
+        return UserSerializer(students, many=True).data
     
     def get_professors_for_module(self, module):
         professors = get_professors_for_module(module)
         return UserSerializer(professors, many=True).data
 
 class UserSerializer(serializers.ModelSerializer):
+    is_lecturer = serializers.SerializerMethodField('get_is_lecturer')
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'date_joined']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'is_lecturer']
 
-class StudentDetailSerializer(serializers.ModelSerializer):
-    modules = serializers.SerializerMethodField('get_modules_for_student')
-
-    class Meta:
-        model = Student
-        fields = ['id', 'firstName', 'lastName', 'studentId', 'modules']
-    
-    def get_modules_for_student(self, student):
-        modules = get_modules_for_student(student)
-        return ModuleSerializer(modules, many=True).data
+    def get_is_lecturer(self, user):
+        return user.usertypewrapper.is_lecturer

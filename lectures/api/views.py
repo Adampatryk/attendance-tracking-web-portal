@@ -17,27 +17,55 @@ def api_lecture_details(request, lecture_id):
         #Get the lecture
         lecture = Lecture.objects.get(id = lecture_id)
 
-        #If the user is not the teacher of this module, forbid access
-        if (lecture.module.professor != request.user):
+        #Get all modules
+        lectures_for_user = get_lectures_for_user(request.user)
+        #If the user does not teach this module, restrict access
+        if (lecture not in lectures_for_user):
             return Response(status.HTTP_403_FORBIDDEN)
 
     except Lecture.DoesNotExist: 
         return Response(status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET": 
-        serializer = LectureSerializer(lecture)
+
+        denormalized = False
+        try:
+            if (request.GET['denormalized'] == "true"):
+                denormalized = True
+
+        except Exception as e:
+            denormalized = False
+
+
+        #Choose serializer based on whether the data should be normalised or not
+        if denormalized:
+            serializer = LectureDenormalizedSerializer(lecture)
+        else:
+            serializer = LectureSerializer(lecture)
         return Response(serializer.data)
 
 #Get a list of lectures in JSON
 @api_view(['GET',])
 @permission_classes([IsAuthenticated, ])
 def api_lecture_list(request):     
-    
-    #Get all the lectures that the user has access to
-    users_lectures = get_lectures_for_user(request.user.id)
-
     if request.method == "GET":
-        serializer = LectureSerializer(users_lectures, many=True)
+        denormalized = False
+        try:
+            if (request.GET['denormalized'] == "true"):
+                denormalized = True
+
+        except Exception as e:
+            denormalized = False
+
+        #Get all the lectures that the user has access to
+        users_lectures = get_lectures_for_user(request.user)
+
+        #Choose serializer based on whether the data should be normalised or not
+        if denormalized:
+            serializer = LectureDenormalizedSerializer(users_lectures, many=True)
+        else:
+            serializer = LectureSerializer(users_lectures, many=True)
+
         return Response(serializer.data)
 
 @api_view(['GET', ])
