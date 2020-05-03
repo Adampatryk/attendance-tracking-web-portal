@@ -4,20 +4,22 @@
 
 <ul class="nav">
     <li class="nav-button"><a href="{% url 'lectures:list' %}">Back</a></li>
+    <li class="nav-button"><form id="deleteLectureForm" action="{% url 'lectures:delete' lecture_id=lecture.id %}" method="POST">
+        {% csrf_token %}
+        <button id="deleteLectureButton" type="submit">delete</button>
+    </form></li>
+    
 </ul>
 
-<form action="{% url 'lectures:delete' lecture_id=lecture.id %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">delete</button>
-</form>
 
-<h1>lecture details</h1>
 
-<p>{{lecture.id}}</p>
-<p>{{lecture.title}}</p>
-<p>{{lecture.datetime}}</p>
+<h1 class="center">{{lecture.title}}</h1>
 
-<div id="qr-code">
+<div class="center">
+    <p>{{lecture.datetime}}</p>
+</div>
+
+<div class="center" id="qr-code">
     {% include 'lectures/lecture_qr_code.html' %}
 </div>
 

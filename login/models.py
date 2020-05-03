@@ -20,7 +20,12 @@ def create_user_type_wrapper(sender, instance=None, created=False, **kwargs):
             instance.usertypewrapper.is_lecturer
         except Exception as e:
             UserTypeWrapper.objects.create(user=instance, is_lecturer=False)
-        print(instance.usertypewrapper.is_lecturer, instance, kwargs)
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def update_email(sender, instance=None, created=False, **kwargs):
+    if created:
+        instance.email = instance.username + "@nottingham.ac.uk"
+        instance.save()
 
 #Class to hold extra information about a user
 class UserTypeWrapper(models.Model):

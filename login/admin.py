@@ -14,8 +14,8 @@ class UserInline(admin.StackedInline):
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = (UserInline,)
-    list_display = ('username', 'id', 'password', 'is_lecturer', 'last_login', 'date_joined')
-    list_filter = ('last_login', 'date_joined')
+    list_display = ('username', 'first_name', 'last_name', 'id', 'password', 'is_lecturer', 'last_login', 'date_joined')
+    list_filter = ('usertypewrapper__is_lecturer', 'last_login', 'date_joined')
     ordering = ['id']
     
     def is_lecturer(self, obj):

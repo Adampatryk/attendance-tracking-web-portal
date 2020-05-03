@@ -13,11 +13,18 @@ body {
     background-color: rgba(54, 134, 255, 0.705);
     color: white;
     font-family: "Microsoft Yi Baiti";
+    text-align: center;
 }
 
 h1 {
     text-transform: uppercase;
 }
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
 
 form {
     background-color: white;
@@ -74,13 +81,13 @@ li {
 }
 
 
-#signout-button, #signout-form{
+#signout-button, #signout-form, #deleteLectureButton, #deleteLectureForm{
     color: white;
     background: none;
     border:none;
     font-size: 1.2em;
 }
 
-#signout-button:hover{
+#signout-button:hover, #deleteLectureButton:hover{
     text-decoration: underline;
 }
