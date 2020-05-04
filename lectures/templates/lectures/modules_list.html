@@ -11,7 +11,7 @@
 <div class="list">
     {% for module in modules %}
         <div class="item">
-            <h2><a href="{% url 'lectures:module_details' module_id=module.id %}">{{module.title}}</a></h2>
+            <h2>{{module.title}}</h2>
         </div>
     {% endfor %}
 </div>

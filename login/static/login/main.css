@@ -92,3 +92,10 @@ li {
 #signout-button:hover, #deleteLectureButton:hover{
     text-decoration: underline;
 }
+
+.item {
+    padding: 5px;
+    margin: 1px;
+    border-top: solid 1px white;
+    border-radius: 5px;
+}
